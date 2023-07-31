@@ -18,6 +18,13 @@ public class Usuario {
         this.password = password;
     }
 
+    public Usuario(int tipo, Alumno alumno, String password) {
+        this.tipo = tipo;
+        this.alumno = alumno;
+        this.password = password;
+    }
+
+    
     public Usuario(Alumno alumno, String password) {
         this.alumno = alumno;
         this.password = password;

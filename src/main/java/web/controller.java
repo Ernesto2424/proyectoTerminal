@@ -136,7 +136,7 @@ public class controller extends HttpServlet {
 
         //creamos el objeto alumno y usuario
         Alumno alumno = new Alumno(matricula, nombre, primerApellido, segundoApellido, grupo, turno);
-        Usuario usuario = new Usuario(alumno, password);
+        Usuario usuario = new Usuario(2, alumno, password);
         
         //persistimos en la base de datos al alumno y usuario
         AlumnoDao aluDao = new AlumnoDaoImp();

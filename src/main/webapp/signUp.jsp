@@ -56,11 +56,36 @@
 
                 <!--login-->
 
-                <form action="${pageContext.request.contextPath}/controller?at=login" method="POST">
+                <form action="${pageContext.request.contextPath}/controller?at=signUp" method="POST">
 
                     <div class="mb-4">
-                        <label for="matricula" class="form-label">Matricula:</label>
+                        <label for="matricula" class="form-label">Matricula ó CURP:</label>
                         <input type="text" name="matricula" id="matricula" class="form-control">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="nombre" class="form-label">Nombre(s):</label>
+                        <input type="text" name="nombre" id="nombre" class="form-control">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="primerApellido" class="form-label">Primer Apellido:</label>
+                        <input type="text" name="primerApellido" id="primerApellido" class="form-control">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="segundoApellido" class="form-label">Segundo Apellido:</label>
+                        <input type="text" name="segundoApellido" id="segundoApellido" class="form-control">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="grupo" class="form-label">Grupo:</label>
+                        <input type="text" name="grupo" id="grupo" class="form-control">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="turno" class="form-label">Turno:</label>
+                        <input type="text" name="turno" id="turno" class="form-control">
                     </div>
 
                     <div class="mb-4">
@@ -77,7 +102,7 @@
                     </div>
 
                     <div class="my-3">
-                        <span>No tienes Cuenta? <a href="${pageContext.request.contextPath}/controller?at=register">Registrate</a></span> <br>
+                        <span>No tienes Cuenta? <a href="${pageContext.request.contextPath}/menu.jsp">Registrate</a></span> <br>
                         <span><a href="">Recuperar Contraseña</a></span>
                    
                     </div>

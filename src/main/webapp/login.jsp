@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="my-3">
-                        <span>No tienes Cuenta? <a href="${pageContext.request.contextPath}/menu.jsp">Registrate</a></span> <br>
+                        <span>No tienes Cuenta? <a href="${pageContext.request.contextPath}/controller?at=register">Registrate</a></span> <br>
                         <span><a href="">Recuperar Contraseña</a></span>
                    
                     </div>

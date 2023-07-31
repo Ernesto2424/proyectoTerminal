@@ -54,6 +54,11 @@ public class controller extends HttpServlet {
             throws ServletException, IOException {
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
+    
+    private void registrar(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("signUp.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -74,6 +79,10 @@ public class controller extends HttpServlet {
             switch (accion) {
                 case "inicio":
                     this.inicial(request, response);
+                    break;
+                
+                case "register":
+                    this.registrar(request, response);
                     break;
                 default:
                     throw new AssertionError();

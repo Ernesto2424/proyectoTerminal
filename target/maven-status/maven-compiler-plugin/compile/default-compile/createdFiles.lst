@@ -1,0 +1,14 @@
+datos\RecursoDao.class
+datos\EvaluacionDao.class
+datos\UsuarioDaoImp.class
+domain\Alumno.class
+datos\AlumnoDaoImp.class
+domain\Recurso.class
+datos\RecursoDaoImp.class
+datos\AlumnoDao.class
+domain\Usuario.class
+datos\Conexion.class
+datos\UsuarioDao.class
+datos\EvaluacionDaoImp.class
+domain\Evaluacion.class
+web\controller.class

@@ -4,6 +4,8 @@
  */
 package web;
 
+import datos.AlumnoDao;
+import datos.AlumnoDaoImp;
 import datos.UsuarioDao;
 import datos.UsuarioDaoImp;
 import domain.Alumno;
@@ -54,7 +56,7 @@ public class controller extends HttpServlet {
             throws ServletException, IOException {
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
-    
+
     private void registrar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("signUp.jsp").forward(request, response);
@@ -72,15 +74,15 @@ public class controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String accion = request.getParameter("at");
-        
-        if(accion!=null){
+
+        if (accion != null) {
             switch (accion) {
                 case "inicio":
                     this.inicial(request, response);
                     break;
-                
+
                 case "register":
                     this.registrar(request, response);
                     break;
@@ -103,21 +105,46 @@ public class controller extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession sesion = request.getSession();
-        
+
         //obtenemos los datos del formulario
         String matricula = (String) request.getAttribute("matricula");
         String password = (String) request.getAttribute("password");
-        
+
         //creamos el objeto usuario
         Usuario usuarioObtenido = new Usuario(new Alumno(matricula), password);
-        
+
         //verificar si los datos se encuentran en la base de datos (metodo usuario by ID)
         UsuarioDao usuDao = new UsuarioDaoImp();
         Usuario usuario = usuDao.selectById(usuarioObtenido);
-        
+
         sesion.setAttribute("usuario", usuario);
         response.sendRedirect("index.jsp");
 
+    }
+
+    protected void signUp(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        //obtener los datos del formulario
+        String matricula = request.getParameter("matricula");
+        String nombre = request.getParameter("nombre");
+        String primerApellido = request.getParameter("primerApellido");
+        String segundoApellido = request.getParameter("segundoApellido");
+        String grupo = request.getParameter("grupo");
+        String turno = request.getParameter("turno");
+        String password = request.getParameter("password");
+
+        //creamos el objeto alumno y usuario
+        Alumno alumno = new Alumno(matricula, nombre, primerApellido, segundoApellido, grupo, turno);
+        Usuario usuario = new Usuario(alumno, password);
+        
+        //persistimos en la base de datos al alumno y usuario
+        AlumnoDao aluDao = new AlumnoDaoImp();
+        aluDao.insert(alumno);
+        
+        UsuarioDao usuDao =new UsuarioDaoImp();
+        usuDao.insert(usuario);
+        
     }
 
     @Override
@@ -131,6 +158,9 @@ public class controller extends HttpServlet {
             switch (at) {
                 case "login":
                     this.login(request, response);
+                    break;
+                case "signUp":
+                    this.signUp(request, response);
                     break;
                 default:
                     throw new AssertionError();

@@ -98,7 +98,7 @@
                     </div>
 
                     <div class="d-grid">
-                        <button type="submit" class="btn btn-danger">Iniciar Sesión</button>
+                        <button type="submit" class="btn btn-danger">Registrar</button>
                     </div>
 
                     <div class="my-3">

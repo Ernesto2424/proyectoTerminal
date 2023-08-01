@@ -16,7 +16,7 @@ public class Conexion {
      */
     public Conexion(){}
 
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/terminal?useSSL=false&useTimezone=true&serverTimezone=UTC";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/terminal?serverTimezone=UTC";
     private static final String JDBC_USER = "root";
     private static final String JDBC_PASSWORD = "admin";
 
@@ -48,7 +48,8 @@ public class Conexion {
      * @return reresa la conexion, ya sea actual o nueva
      * @throws SQLException excepcion si ocurro del tipo SQL
      */
-    public static Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.jdbc.Driver");
         return getDataSource().getConnection();
     }
     

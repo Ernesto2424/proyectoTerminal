@@ -5,6 +5,8 @@ import domain.Alumno;
 import domain.Usuario;
 import java.sql.*;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,6 +37,8 @@ public class UsuarioDaoImp implements UsuarioDao{
 
         } catch (SQLException e) {
             e.printStackTrace(System.out);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDaoImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Conexion.close(pst);
             Conexion.close(cn);
@@ -66,6 +70,8 @@ public class UsuarioDaoImp implements UsuarioDao{
 
         } catch (SQLException e) {
             e.printStackTrace(System.out);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDaoImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Conexion.close(rs);
             Conexion.close(pst);

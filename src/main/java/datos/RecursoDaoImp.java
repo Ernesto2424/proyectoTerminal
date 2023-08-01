@@ -5,6 +5,8 @@ import domain.Recurso;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,6 +34,8 @@ public class RecursoDaoImp implements RecursoDao{
 
         } catch (SQLException e) {
             e.printStackTrace(System.out);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RecursoDaoImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Conexion.close(pst);
             Conexion.close(cn);

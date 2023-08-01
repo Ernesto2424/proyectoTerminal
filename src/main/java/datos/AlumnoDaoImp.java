@@ -2,6 +2,8 @@ package datos;
 
 import domain.Alumno;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,6 +36,8 @@ public class AlumnoDaoImp implements AlumnoDao {
             rows = pst.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace(System.out);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AlumnoDaoImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Conexion.close(pst);
             Conexion.close(cn);
@@ -72,6 +76,8 @@ public class AlumnoDaoImp implements AlumnoDao {
 
         } catch (SQLException e) {
             e.printStackTrace(System.out);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AlumnoDaoImp.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             Conexion.close(rs);
             Conexion.close(pst);

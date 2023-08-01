@@ -2,9 +2,6 @@ package datos;
 
 import domain.Alumno;
 import java.sql.*;
-import datos.Conexion;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -12,18 +9,21 @@ import java.util.logging.Logger;
  */
 public class AlumnoDaoImp implements AlumnoDao {
 
-    private static final String SQL_INSERT = "INSERT INTO alumno (matricula,nombre,primer_apellido,segundo_apellido,grupo,turno) VALUES (?,?,?,?,?,?)";
+    private static final String SQL_INSERT = "INSERT INTO alumno(matricula,nombre,primer_apellido,segundo_apellido,grupo,turno) VALUES(?,?,?,?,?,?)";
     private static final String SQL_SELECTBYID = "SELECT * FROM alumno WHERE matricula = ?";
     private static final String SQL_UPDATE = "UPDATE alumno SET nombre = ?, primer_apellido = ?, segundo_apellido = ?, grupo = ?, turno = ? WHERE matricula=?";
 
     @Override
     public int insert(Alumno alumno) {
 
-        int row = 0;
         Connection cn = null;
         PreparedStatement pst = null;
+        int rows = 0;
         try {
             cn = Conexion.getConnection();
+            if (cn != null) {
+                System.out.println("el estado de la conexion es: ");
+            }
             pst = cn.prepareStatement(SQL_INSERT);
             pst.setString(1, alumno.getMatricula());
             pst.setString(2, alumno.getNombre());
@@ -31,16 +31,14 @@ public class AlumnoDaoImp implements AlumnoDao {
             pst.setString(4, alumno.getSegundoApellido());
             pst.setString(5, alumno.getGrupo());
             pst.setString(6, alumno.getTurno());
-            row = pst.executeUpdate();
-
-        } catch (Exception e) {
-            e.printStackTrace(System.out);
+            rows = pst.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace(System.out);
         } finally {
             Conexion.close(pst);
             Conexion.close(cn);
         }
-        return row;
-
+        return rows;
     }
 
     @Override
@@ -61,19 +59,18 @@ public class AlumnoDaoImp implements AlumnoDao {
             pst = cn.prepareStatement(SQL_SELECTBYID);
             pst.setString(1, alumno.getMatricula());
             rs = pst.executeQuery();
-            
-            //rs.next();
-                rs.absolute(1);
-                String matricula = rs.getString("matricula");
-                String nombre = rs.getString("nombre");
-                String primerApellido = rs.getString("primer_apellido");
-                String segundoApellido = rs.getString("segundo_apellido");
-                String grupo = rs.getString("grupo");
-                String turno = rs.getString("turno");
-                alumnoBuscado = new Alumno(matricula, nombre, primerApellido, segundoApellido, grupo, turno);
-            
 
-        } catch (Exception e) {
+            //rs.next();
+            rs.absolute(1);
+            String matricula = rs.getString("matricula");
+            String nombre = rs.getString("nombre");
+            String primerApellido = rs.getString("primer_apellido");
+            String segundoApellido = rs.getString("segundo_apellido");
+            String grupo = rs.getString("grupo");
+            String turno = rs.getString("turno");
+            alumnoBuscado = new Alumno(matricula, nombre, primerApellido, segundoApellido, grupo, turno);
+
+        } catch (SQLException e) {
             e.printStackTrace(System.out);
         } finally {
             Conexion.close(rs);
@@ -101,7 +98,7 @@ public class AlumnoDaoImp implements AlumnoDao {
             pst.setString(5, alumno.getTurno());
             pst.setString(6, alumno.getMatricula());
             row = pst.executeUpdate();
-            
+
         } catch (Exception e) {
             e.printStackTrace(System.out);
         } finally {
